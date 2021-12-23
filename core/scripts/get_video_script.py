@@ -1,4 +1,3 @@
-import asyncio
 from dotenv import load_dotenv
 import requests
 import os
@@ -9,15 +8,21 @@ import googleapiclient.errors
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from django.utils import timezone
 
-from .models import YoutubeVideo
+
+from video_module.models import YoutubeVideo
 # get videos from Youtube search API ordered by published date (most recent first)
 # def get_videos(search:str):
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
 
 # async function to get videos from Youtube search API ordered by published date (most recent first)
-def get_videos_async(search:str):
+def run():
+    print(f"running script for getting videos:: {timezone.now()}")
+    # search query
+    search = "cricket"
+    load_dotenv()
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION,developerKey=os.getenv('YOUTUBE_API_KEY'))
 
   # Call the search.list method to retrieve results matching the specified
@@ -28,8 +33,8 @@ def get_videos_async(search:str):
             maxResults=10, 
             order='date',
     ).execute()
-    print(search_response)
-    # create YoutubeVideo objects from search results
+
+    # create YoutubeVideo objects from search results and store in db
     for search_result in search_response.get('items', []):
         if search_result['id']['kind'] == 'youtube#video':
             # create if same id does not exists

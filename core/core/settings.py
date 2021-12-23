@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'rest_framework',
 
     # OWN:
     'video_module',
@@ -55,7 +57,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'core.urls'
 
 import os
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/naman/Desktop/django/ViewTube/core/video_module/viewtube-335616-77fc6ff3b2f7.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "video_module/viewtube-335616-77fc6ff3b2f7.json"
 
 
 TEMPLATES = [
@@ -130,3 +132,15 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    # allow all authentication
+    # 'DEFAULT_AUTHENTICATION_CLASSES': {
+    #     'rest_framework.authentication.SessionAuthentication',
+    # },
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ]
+}

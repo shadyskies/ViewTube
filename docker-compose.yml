@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+    backend:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      command: /bin/sh -c "service cron start && cd core && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+      ports:
+        - 8000:8000
+      volumes:
+        - .:/app

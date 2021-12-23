@@ -7,7 +7,7 @@
 - [Screenshots](#ss)
 
 ## About <a name = "about"></a>
-Store videos retrieved from YouTube API and display them.  
+Get videos from Youtube based on pre-defined search parameter using the YouTube API as a background process.
 
 
 ### Prerequisites:
@@ -17,27 +17,17 @@ Clone the repository:
 ```
 git clone https://github.com/shadyskies/ViewTube.git
 ```
-
-### Installing:
-
-Install the required python modules
-
-```
-pip3 install requirements.txt
-```
-Apply the intial migrations and then start the server.
-
-```
-python3 manage.py migrate
-python3 manage.py runserver
-```
+Docker should be installed.
 
 
 ## Usage <a name = "usage"></a>
+Build and run the docker contaner using docker compose.
+
 ```
-cd ecom_website
-python3 manage.py runserver
+docker-compose 
 ```
 ## Screenshots <a name = "ss"></a>
 <img src="screens/ss1.png">
+<img src="screens/ss2.png">
+
 
